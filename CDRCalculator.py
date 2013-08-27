@@ -1,6 +1,6 @@
 ###
 # Author: Jason Turnbull 
-# Version: 1.0
+# Version: 1.1
 # Date: August 27 2013
 ###
 
@@ -11,25 +11,48 @@ def addCD (baseNumStr, CDR):
 	## FirstUp, turn our baseNumStr into a Number. (We take it as a string in case it has leading zeros)
 	baseNum = int(baseNumStr) 
 	
-	cdrRules = {'mod10v01':{'weights': [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],
+	## addDigits can be 'Y' - add 2 right digits once, 'T' - truncate (only use right digit), 'R' - add recursively until single or 'N' - no digit addition
+	
+	cdrRules = {'mod09v01':{'weights': [21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2],
+							'startLeft': False, 
+							'divideBy': 9, 
+							'subtractFrom': 9, 
+							'addDigits': 'N', 
+							'keepZero': False, 
+							'length': 1},
+				'mod09v02':{'weights': [13,11,7,5,3,2,1,13,11,7,5,3,2,1,13,11,7,5,3,2],
+							'startLeft': False, 
+							'divideBy': 9, 
+							'subtractFrom': 9, 
+							'addDigits': 'N',   
+							'keepZero': False, 
+							'length': 1},
+				'mod10v01':{'weights': [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],
 							'startLeft': False, 
 							'divideBy': 10, 
 							'subtractFrom': 10, 
-							'addDigits': 'Y',  #'Y','N','T','R' 
+							'addDigits': 'Y',   
 							'keepZero': True, 
 							'length': 1},
 				'mod11v13A':{'weights': [21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2],
 							'startLeft': False, 
 							'divideBy': 11, 
 							'subtractFrom': 11, 
-							'addDigits': 'N',  #'Y','N','T','R' 
+							'addDigits': 'N',   
 							'keepZero': True, 
+							'length': 2},
+				'mod13v01':{'weights': [21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2],
+							'startLeft': False, 
+							'divideBy': 13, 
+							'subtractFrom': 61, 
+							'addDigits': 'N',   
+							'keepZero': False, 
 							'length': 2},
 				'mod97v02':{'weights': [20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,2,1,4,3],
 							'startLeft': False, 
 							'divideBy': 97, 
 							'subtractFrom': 97, 
-							'addDigits': 'N',  #'Y','N','T','R' 
+							'addDigits': 'N',  
 							'keepZero': False, 
 							'length': 2}
 				}
